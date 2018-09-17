@@ -40,3 +40,96 @@ function abs(x) {
     }
 }
 console.log(abs());
+
+
+// arguments
+// 关键字arguments只在函数内部起作用，并且永远指向当前函数调用者的参数
+function foo(x){
+    console.log('x = ' + x);
+    for (var i=0; i<arguments.length; i++){
+        console.log('arg ' + i + ' = ' + arguments[i]);
+    }
+}
+
+console.log(foo(10, 20, 30));
+
+
+var array = ['apple', 'google', 'micrsoft'];
+var i, x;
+for (i=0; i<array.length; i++) {
+    x = array[i];
+    console.log(x);
+}
+
+
+// 函数不定义任何参数，也可以拿到参数的值
+function abs(){
+    if (arguments.length == 0){
+        return 0
+    }
+    var x = arguments[0];
+    return x >= 0 ? x : -x;
+}
+
+console.log(abs());
+console.log(abs(-10));
+console.log(abs(100));
+
+
+// arguments用于判断传入参数的个数
+function foo(a, b, c){
+    if (arguments.length==2) {
+        c = b;
+        b = null;
+    }
+}
+
+
+// rest参数
+function foo(a, b){
+    var i, rest = [];
+    if (arguments.length > 2) {
+        for (i=2; i<arguments.length; i++) {
+            rest.push(arguments[i]);
+        }
+    }
+    console.log('a = ' + a);
+    console.log('b = ' + b);
+    console.log(rest);
+}
+
+
+// 更好的方法
+// 从索引位置2获取的参数就是rest
+// rest参数只能写在最后面，前面用...标识
+function foo(a, b, ...rest) {
+    console.log('a = ' + a);
+    console.log('b = ' + b);
+    console.log(rest);
+}
+
+console.log(foo(1, 2, 3, 4, 5, 6));
+console.log(foo(1));
+console.log(foo(1, 2));
+
+// js引擎在行末自动添加分号的机制
+// 多行正确的写法
+function foo(){
+    return {
+        name: 'treehl'
+    };
+}
+
+console.log(foo());
+
+
+// test
+function area_of_circle(r, pi) {
+    if (pi == null) {
+        return r * r * 3.14;
+    } else {
+        return r * r * pi;
+    }
+}
+
+console.log(area_of_circle(3, 3.1415));
